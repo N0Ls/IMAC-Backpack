@@ -1,0 +1,24 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/nils/Documents/S3/OPENGL/GLImac-Template/TP_3/ex01_triangle_blanc.cpp" "/home/nils/Documents/S3/OPENGL/GLImac-Template-build/TP_3/CMakeFiles/TP_3_ex01_triangle_blanc.dir/ex01_triangle_blanc.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/include/SDL"
+  "/home/nils/Documents/S3/OPENGL/GLImac-Template/glimac/include"
+  "/home/nils/Documents/S3/OPENGL/GLImac-Template/third-party/include"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/nils/Documents/S3/OPENGL/GLImac-Template-build/glimac/CMakeFiles/glimac.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
