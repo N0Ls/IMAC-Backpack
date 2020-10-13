@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     //Specification des attributs
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexAttribPointer(VERTEX_ATTR_POSITION, 2, GL_FLOAT, GL_FALSE, 2*sizeof(GLfloat), 0);
-
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     //Debinder le VAO
     glBindVertexArray(0);
 
