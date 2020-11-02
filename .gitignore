@@ -4,3 +4,5 @@ builds/
 *.o
 
 bin/
+
+S3/OPENGL/GLImac-Template-build/

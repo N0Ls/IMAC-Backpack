@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/TP_3_ex01_triangle_blanc.dir/ex01_triangle_blanc.cpp.o -o TP_3_ex01_triangle_blanc  ../glimac/libglimac.a -Wl,-Bstatic -lSDLmain -Wl,-Bdynamic -lSDL -lpthread /usr/lib/x86_64-linux-gnu/libGL.so.1 -lGLEW 
