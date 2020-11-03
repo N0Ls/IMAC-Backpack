@@ -31,5 +31,7 @@ void main() {
   mat3 R = rotate(180.0);
   mat3 S = scale(0.5,0.5);
   gl_Position = vec4((T*R*S*vec3(aVertexPosition, 1)).xy, 0, 1);
+
+  
   //gl_Position = vec4((vec3(aVertexPosition, 1)).xy, 0, 1);
 };
