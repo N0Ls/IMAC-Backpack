@@ -113,52 +113,47 @@ return result;
 
 
 
-int VectorD::save(const std::string &filename) const{
+void VectorD::save(const std::string &filename) const{
 
-	//open the file
-	std::ofstream myfile;
-	myfile.open(filename, std::ios::out | std::ios::binary);
+    //open the file
+    std::ofstream myfile;
+    myfile.open(filename, std::ios::out | std::ios::binary);
 
     if(!myfile.is_open()){
-        std::cerr << "error: can not create file: " << filename << std::endl;
-        return EXIT_FAILURE;
+        throw std::ios_base::failure("VectorD::save: error: can not open file: " + filename);
     }
 
-	// write the vector size
-	myfile << size() << std::endl;
+    // write the vector size
+    myfile << size() << std::endl;
 
-	for(size_t i=0; i<size(); ++i)
-		myfile << _data[i] << " ";
+    for(size_t i=0; i<size(); ++i)
+        myfile << _data[i] << " ";
 
-	myfile.close();
-
-	return EXIT_SUCCESS;
+    myfile.close();
 }
 
 
-int VectorD::load(const std::string &filename){
+void VectorD::load(const std::string &filename){
 
-	//open the file
-	std::ifstream myfile;
-	myfile.open(filename, std::ios::in | std::ios::binary);
+    //open the file
+    std::ifstream myfile;
+    myfile.open(filename, std::ios::in | std::ios::binary);
     if(!myfile.is_open()){
-        std::cerr << "error: can not open file: " << filename << std::endl;
-        return EXIT_FAILURE;
+        throw std::ios_base::failure("VectorD::load: error: can not open file: " + filename);
     }
 
-	// read the vector size
-	size_t vectorSize;
-	myfile >> vectorSize;
-	if(vectorSize != size())
+    // read the vector size
+    size_t vectorSize;
+    myfile >> vectorSize;
+    if(vectorSize != size())
         *this = VectorD(vectorSize);
 
     // read the data
-	for(size_t i=0; i<vectorSize; ++i)
-		myfile >> _data[i];
+    for(size_t i=0; i<vectorSize; ++i)
+        myfile >> _data[i];
 
-	// close file
-	myfile.close();
-	return EXIT_SUCCESS;
+    // close file
+    myfile.close();
 }
 
 
