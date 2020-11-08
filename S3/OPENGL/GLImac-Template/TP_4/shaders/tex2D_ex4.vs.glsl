@@ -3,9 +3,8 @@ precision mediump float;
 
 layout(location = 0) in vec2 aVertexPosition;
 layout(location = 1) in vec2 aVertexTexture;
-//uniform float uTime;
-uniform mat3 uModelMatrix;
 
+uniform mat3 uModelMatrix;
 out vec2 vVertexTexture;
 
 mat3 rotate(float a){
