@@ -34,7 +34,6 @@ int main(int argc, char** argv) {
     GLint uMainTextureLoc=glGetUniformLocation(program.getGLId(),"uEarthTexture");
     GLint uCloudTextureLoc=glGetUniformLocation(program.getGLId(),"uCloudTexture");
 
-
     glEnable(GL_DEPTH_TEST);
 
     //Loading texture
@@ -46,7 +45,6 @@ int main(int argc, char** argv) {
       std::cerr << "Error during texture loading. Exiting program." << std::endl;
       return EXIT_FAILURE;
     }
-
     //Creating Texture Object
     GLuint textures[3];
     glGenTextures(3,textures);
