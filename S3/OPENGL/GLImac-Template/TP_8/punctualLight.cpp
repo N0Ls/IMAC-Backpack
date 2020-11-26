@@ -238,14 +238,14 @@ int main(int argc, char** argv) {
         glm::mat4 earthMVMatrix = glm::rotate(globalMVMatrix, windowManager.getTime(), glm::vec3(0, 1, 0)); // Translation * Rotation
 
         //Set uniforms
-        glm::mat4 lightMVMatrix = glm::rotate(globalMVMatrix, windowManager.getTime(), glm::vec3(0, 1, 0)); // Translation * Rotation
-        glm::vec3 lightPos_vs(lightMVMatrix * glm::vec4(1, 1, 1, 0));
+        glm::mat4 lightMVMatrix = globalMVMatrix; // Translation * Rotation
+        glm::vec3 lightPos_vs(lightMVMatrix * glm::vec4(1, 1, 1, 1));
 
         glUniform3fv(earthProgram.uLightPos_vs, 1, glm::value_ptr(lightPos_vs));
-        glUniform3f(earthProgram.uLightIntensity, 10.0, 10.0, 10.0);
+        glUniform3f(earthProgram.uLightIntensity, 1.0, 1.0, 1.0);
 
         glUniform3f(earthProgram.uKd, 0.1, 1.0, 0.2);
-        glUniform3f(earthProgram.uKs, 1.0, 0.2, 0.2);
+        glUniform3f(earthProgram.uKs, 0.2, 0.2, 0.2);
         glUniform1f(earthProgram.uShininess, 22);
 
 
@@ -289,7 +289,7 @@ int main(int argc, char** argv) {
 
 
             glUniform3fv(moonProgram.uLightPos_vs, 1, glm::value_ptr(lightPos_vs));
-            glUniform3f(moonProgram.uLightIntensity, 10.0, 10.0, 10.0);
+            glUniform3f(moonProgram.uLightIntensity, 1.0, 1.0, 1.0);
 
 
             glUniform3f(moonProgram.uKd, 1.0, 0.0, 0.0);
