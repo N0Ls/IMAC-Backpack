@@ -20,12 +20,12 @@ struct EarthProgram {
     GLint uKs;
     GLint uShininess;
 
-    GLint uLightDir_vs;
+    GLint uLightPos_vs;
     GLint uLightIntensity;
 
     EarthProgram(const FilePath& applicationPath):
         m_Program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
-                              applicationPath.dirPath() + "shaders/directionallight.fs.glsl")) {
+                              applicationPath.dirPath() + "shaders/punctuallight.fs.glsl")) {
         uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
         uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
         uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
@@ -34,7 +34,7 @@ struct EarthProgram {
         uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
         uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
 
-        uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
+        uLightPos_vs = glGetUniformLocation(m_Program.getGLId(), "uLightPos_vs");
         uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
 
     }
@@ -52,12 +52,12 @@ struct MoonProgram {
     GLint uKs;
     GLint uShininess;
 
-    GLint uLightDir_vs;
+    GLint uLightPos_vs;
     GLint uLightIntensity;
 
     MoonProgram(const FilePath& applicationPath):
       m_Program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
-                            applicationPath.dirPath() + "shaders/directionallight.fs.glsl")) {
+                            applicationPath.dirPath() + "shaders/punctuallight.fs.glsl")) {
       uMVPMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVPMatrix");
       uMVMatrix = glGetUniformLocation(m_Program.getGLId(), "uMVMatrix");
       uNormalMatrix = glGetUniformLocation(m_Program.getGLId(), "uNormalMatrix");
@@ -66,7 +66,7 @@ struct MoonProgram {
       uKs = glGetUniformLocation(m_Program.getGLId(), "uKs");
       uShininess = glGetUniformLocation(m_Program.getGLId(), "uShininess");
 
-      uLightDir_vs = glGetUniformLocation(m_Program.getGLId(), "uLightDir_vs");
+      uLightPos_vs = glGetUniformLocation(m_Program.getGLId(), "uLightPos_vs");
       uLightIntensity = glGetUniformLocation(m_Program.getGLId(), "uLightIntensity");
     }
 };
@@ -239,10 +239,10 @@ int main(int argc, char** argv) {
 
         //Set uniforms
         glm::mat4 lightMVMatrix = glm::rotate(globalMVMatrix, windowManager.getTime(), glm::vec3(0, 1, 0)); // Translation * Rotation
-        glm::vec3 lightDir_vs(globalMVMatrix * glm::vec4(1, 1, 1, 0));
+        glm::vec3 lightPos_vs(lightMVMatrix * glm::vec4(1, 1, 1, 0));
 
-        glUniform3fv(earthProgram.uLightDir_vs, 1, glm::value_ptr(lightDir_vs));
-        glUniform3f(earthProgram.uLightIntensity, 1.0, 1.0, 1.0);
+        glUniform3fv(earthProgram.uLightPos_vs, 1, glm::value_ptr(lightPos_vs));
+        glUniform3f(earthProgram.uLightIntensity, 10.0, 10.0, 10.0);
 
         glUniform3f(earthProgram.uKd, 0.1, 1.0, 0.2);
         glUniform3f(earthProgram.uKs, 1.0, 0.2, 0.2);
@@ -288,12 +288,12 @@ int main(int argc, char** argv) {
             moonMVMatrix = glm::scale(moonMVMatrix, glm::vec3(0.2, 0.2, 0.2)); // Translation * Rotation * Translation * Scale
 
 
+            glUniform3fv(moonProgram.uLightPos_vs, 1, glm::value_ptr(lightPos_vs));
+            glUniform3f(moonProgram.uLightIntensity, 10.0, 10.0, 10.0);
 
-            glUniform3f(moonProgram.uLightIntensity, 0.25, 0.25, 0.25);
-            glUniform3fv(moonProgram.uLightDir_vs, 1, glm::value_ptr(lightDir_vs));
 
-            glUniform3f(moonProgram.uKd, 1.0, 0.2, 0.2);
-            glUniform3f(moonProgram.uKs, 0.2, 0.2, 0.2);
+            glUniform3f(moonProgram.uKd, 1.0, 0.0, 0.0);
+            glUniform3f(moonProgram.uKs, 1.0, 0.2, 0.2);
             glUniform1f(moonProgram.uShininess, 1);
 
             // Send matrices to the GPU
